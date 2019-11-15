@@ -1,2 +1,3 @@
 # Cabrones.CSharpTest
-Utils for tests in C#
+
+Utilitários para testes em geral.
