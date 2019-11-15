@@ -3,12 +3,13 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.0</TargetFramework>
         <IsPackable>true</IsPackable>
-        <Version>0.0.0.562</Version>
+        <Version>0.0.0.563</Version>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.0.0.562</PackageVersion>
+        <PackageVersion>1.0.0.563</PackageVersion>
         <Title>Cabrones.UtilForTest</Title>
         <Authors>sergio@cabral.br.com</Authors>
-        <Description>Utils for tests</Description>
+        <Description>Utils for tests</Description>        
     </PropertyGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
