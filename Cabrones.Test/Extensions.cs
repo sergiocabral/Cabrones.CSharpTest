@@ -84,7 +84,7 @@ namespace Cabrones.Test
         /// </summary>
         /// <param name="type">Tipo a ser consultado.</param>
         /// <param name="signature">Assinatura esperada.</param>
-        public static void TestIfHasMethod(this Type type, string signature)
+        public static void TestMethodPresence(this Type type, string signature)
         {
             // Arrange, Given
 
@@ -147,7 +147,7 @@ namespace Cabrones.Test
         /// </summary>
         /// <param name="instance">Instância.</param>
         /// <param name="propertyName">Nome da propriedade.</param>
-        public static void TestIfPropertyUseCache(this object instance, string propertyName)
+        public static void TestPropertyCache(this object instance, string propertyName)
         {
             // Arrange, Given
 
