@@ -30,7 +30,7 @@ namespace Cabrones.Test
         /// </summary>
         /// <param name="type">Tipo da classe.</param>
         /// <param name="implementations">TipoS que deve ser implementado.</param>
-        public static void TestTypeImplementations(this Type type, params Type[] implementations)
+        public static void TestImplementations(this Type type, params Type[] implementations)
         {
             // Arrange, Given
             
@@ -64,7 +64,7 @@ namespace Cabrones.Test
         /// </summary>
         /// <param name="type">Tipo a ser consultado.</param>
         /// <param name="count">Total de métodos esperados.</param>
-        public static void TestTypeMethodsCount(this Type type, int count)
+        public static void TestMethodsCount(this Type type, int count)
         {
             // Arrange, Given
 
@@ -84,7 +84,7 @@ namespace Cabrones.Test
         /// </summary>
         /// <param name="type">Tipo a ser consultado.</param>
         /// <param name="signature">Assinatura esperada.</param>
-        public static void TestTypeMethodSignature(this Type type, string signature)
+        public static void TestIfHasMethod(this Type type, string signature)
         {
             // Arrange, Given
 
@@ -147,25 +147,25 @@ namespace Cabrones.Test
         /// </summary>
         /// <param name="instance">Instância.</param>
         /// <param name="propertyName">Nome da propriedade.</param>
-        public static void TestPropertyWithCache(this object instance, string propertyName)
+        public static void TestIfPropertyUseCache(this object instance, string propertyName)
         {
             // Arrange, Given
 
             var type = instance.GetType();
-            var propriedade = type.GetProperty(propertyName,
+            var property = type.GetProperty(propertyName,
                 BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
            
-            object Query() => propriedade?.GetValue(instance);
+            object Query() => property?.GetValue(instance);
 
             // Act, When
 
-            var (tempo1, valor1) = StopwatchQuery(Query);
-            var (tempo2, valor2) = StopwatchQuery(Query);
+            var (time1, value1) = StopwatchFor(Query);
+            var (time2, value2) = StopwatchFor(Query);
 
             // Assert, Then
             
-            valor2.Should().BeEquivalentTo(valor1);
-            tempo2.Should().BeLessThan(tempo1);
+            value2.Should().BeEquivalentTo(value1);
+            time2.Should().BeLessThan(time1);
         }
         
         /// <summary>
@@ -173,17 +173,17 @@ namespace Cabrones.Test
         /// </summary>
         /// <param name="query">Função de consulta.</param>
         /// <typeparam name="T">Tipo de retorno.</typeparam>
-        /// <returns>Tempo e valores.</returns>
-        public static Tuple<long, T> StopwatchQuery<T>(this Func<T> query)
+        /// <returns>Tempo e valor retornado.</returns>
+        public static Tuple<long, T> StopwatchFor<T>(this Func<T> query)
         {
             var stopwatch = new Stopwatch();
                 
             stopwatch.Start();
-            var valores = query();
+            var value = query();
             stopwatch.Stop();
-            var tempo = stopwatch.ElapsedTicks;
+            var time = stopwatch.ElapsedTicks;
             
-            return new Tuple<long, T>(tempo, valores);
+            return new Tuple<long, T>(time, value);
         }
     }
 }
