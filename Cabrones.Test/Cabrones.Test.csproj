@@ -3,13 +3,18 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.0</TargetFramework>
         <IsPackable>true</IsPackable>
-        <Version>0.0.0.572</Version>
+        <Version>0.0.0.573</Version>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.0.0.572</PackageVersion>
+        <PackageVersion>1.0.0.573</PackageVersion>
         <Title>Cabrones.UtilForTest</Title>
         <Authors>sergio@cabral.br.com</Authors>
-        <Description>Utils for tests</Description>        
+        <Description>Utils for tests</Description>
+        <PackageProjectUrl>https://github.com/sergiocabral/Cabrones.CSharpTest</PackageProjectUrl>
+        <PackageLicenseUrl>https://raw.githubusercontent.com/sergiocabral/Cabrones.CSharpTest/master/LICENSE.txt</PackageLicenseUrl>
+        <PackageIconUrl>https://pt.gravatar.com/userimage/18417969/ae2007509611fb5b97b831bfc7e24ccd.jpeg</PackageIconUrl>
+        <RepositoryUrl>https://github.com/sergiocabral/Cabrones.CSharpTest</RepositoryUrl>
+        <Copyright>sergiocabral.com</Copyright>        
     </PropertyGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
