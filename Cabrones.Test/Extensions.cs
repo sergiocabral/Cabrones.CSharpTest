@@ -8,6 +8,10 @@ using System.Text.RegularExpressions;
 using AutoFixture;
 using FluentAssertions;
 
+// ReSharper disable UnusedMember.Global
+// ReSharper disable UnusedParameter.Global
+// ReSharper disable MemberCanBePrivate.Global
+
 namespace Cabrones.Test
 {
     /// <summary>
@@ -77,6 +81,30 @@ namespace Cabrones.Test
             // Assert, Then
 
             methodsOfType.Count.Should().Be(count);
+        }
+        
+        /// <summary>
+        /// Testa se a quantidade de valores em um enum está correta.
+        /// </summary>
+        /// <param name="type">Tipo a ser consultado.</param>
+        /// <param name="count">Total de métodos esperados.</param>
+        public static void TestEnumValuesCount(this Type type, int count)
+        {
+            if (!type.IsEnum) throw new ArgumentException();
+            Enum.GetNames(type).Should().HaveCount(count);
+        }
+        
+        /// <summary>
+        /// Testa se um valor de enum existe com base no seu nome e valor.
+        /// </summary>
+        /// <param name="type">Tipo a ser consultado.</param>
+        /// <param name="name">Nome esperado.</param>
+        /// <param name="value">Valor esperado.</param>
+        public static void TestEnumValuePresence(this Type type, string name, int value)
+        {
+            if (!type.IsEnum) throw new ArgumentException();
+            Enum.GetNames(type).Should().Contain(name);
+            Enum.Parse(type, name).Should().Be(value);
         }
         
         /// <summary>
