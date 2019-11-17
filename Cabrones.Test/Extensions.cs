@@ -39,20 +39,21 @@ namespace Cabrones.Test
             // Arrange, Given
             
             var methodsOfType = type.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-                .Where(a => (a.IsPublic || a.IsSpecialName) &&
+                .Where(a => a.IsPublic &&
                             !a.IsStatic &&
                             a.DeclaringType == type &&
                             a.DeclaringType?.Assembly == type.Assembly)
-                .Select(a => a.ToString())
+                .Select(a => a.Name)
                 .ToList();
 
-            var methods = new List<MethodInfo>();
+            var methods = new List<string>();
 
             foreach (var implementation in implementations)
             {
                 methods.AddRange(implementation.GetMethods()
                     .Where(a => a.IsPublic && a.DeclaringType == implementation &&
                                 a.DeclaringType?.Assembly == implementation.Assembly)
+                    .Select(a => a.Name)
                     .ToList());
             }
 
@@ -83,7 +84,7 @@ namespace Cabrones.Test
 
             // Act, When
 
-            var methodsOfType = methods.Where(a => (a.IsPublic || a.IsSpecialName) && 
+            var methodsOfType = methods.Where(a => a.IsPublic && 
                                                    a.DeclaringType == type && 
                                                    a.DeclaringType?.Assembly == type.Assembly)
                 .ToList();
