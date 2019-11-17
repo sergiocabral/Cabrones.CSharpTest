@@ -59,6 +59,7 @@ namespace Cabrones.Test
 
             var methodsInType = type.GetMethods().Where(a => a.IsPublic).Select(a => a.ToString()).ToList();
             methods.RemoveAll(a => !methodsOfType.Contains(a.ToString()) && methodsInType.Contains(a.ToString()));
+            methods = methods.Distinct().ToList();
             
             // Act, When
 
