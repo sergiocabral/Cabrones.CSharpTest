@@ -79,11 +79,14 @@ namespace Cabrones.Test
         {
             // Arrange, Given
 
-            var methods = type.GetMethods();
+            var methods = type.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
             // Act, When
 
-            var methodsOfType = methods.Where(a => a.IsPublic && a.DeclaringType == type && a.DeclaringType?.Assembly == type.Assembly).ToList();
+            var methodsOfType = methods.Where(a => (a.IsPublic || a.IsSpecialName) && 
+                                                   a.DeclaringType == type && 
+                                                   a.DeclaringType?.Assembly == type.Assembly)
+                .ToList();
 
             // Assert, Then
 
