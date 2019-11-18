@@ -19,7 +19,7 @@ namespace Cabrones.Test
         public static void AssertEnumValuesCount(this Type type, int count)
         {
             if (!type.IsEnum) throw new ArgumentException();
-            Enum.GetNames(type).Should().HaveCount(count);
+            Enum.GetNames(type).Should().HaveCount(count, nameof(AssertEnumValuesCount));
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Cabrones.Test
         public static void AssertMyOwnPublicPropertiesCount(this Type type, int count)
         {
             var own = type.MyOwnProperties().Where(a => a.IsPublic).ToList();
-            own.Should().HaveCount(count);
+            own.Should().HaveCount(count, nameof(AssertMyOwnPublicPropertiesCount));
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Cabrones.Test
         public static void AssertMyOwnPublicMethodsCount(this Type type, int count)
         {
             var own = type.MyOwnMethods().Where(a => a.IsPublic).ToList();
-            own.Should().HaveCount(count);
+            own.Should().HaveCount(count, nameof(AssertMyOwnPublicMethodsCount));
         }
         
         /// <summary>
@@ -56,7 +56,7 @@ namespace Cabrones.Test
         public static void AssertMyOwnImplementations(this Type type, params Type[] implementations)
         {
             var myOwnImplementations = type.MyOwnImplementations().ToList();
-            myOwnImplementations.Should().BeEquivalentTo(implementations.ToList());
+            myOwnImplementations.Should().BeEquivalentTo(implementations.ToList(), nameof(AssertMyOwnImplementations));
         }
         
         /// <summary>
@@ -70,7 +70,7 @@ namespace Cabrones.Test
                 .AllProperties().Where(a => a.IsPublic)
                 .Select(a => a.GetProperty()).Distinct()
                 .Select(a => a?.ToSignatureCSharp()).ToList();
-            signatures.Should().Contain(signature);
+            signatures.Should().Contain(signature, nameof(AssertPublicPropertyPresence));
         }
         
         /// <summary>
@@ -81,7 +81,7 @@ namespace Cabrones.Test
         public static void AssertPublicMethodPresence(this Type type, string signature)
         {
             var signatures = type.AllMethods().Where(a => a.IsPublic).Select(a => a.ToSignatureCSharp()).ToList();
-            signatures.Should().Contain(signature);
+            signatures.Should().Contain(signature, nameof(AssertPublicMethodPresence));
         }
         
         /// <summary>
@@ -102,7 +102,7 @@ namespace Cabrones.Test
             }
             myImplementations = myImplementations.Where(a => a != null && a != typeof(object)).Distinct().ToList();
             
-            myImplementations.Should().BeEquivalentTo(implementations.ToList());
+            myImplementations.Should().BeEquivalentTo(implementations.ToList(), nameof(AssertMyImplementations));
         }
     }
 }
