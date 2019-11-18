@@ -3,11 +3,11 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.0</TargetFramework>
         <IsPackable>true</IsPackable>
-        <Version>1.1.0.671</Version>
+        <Version>1.1.0.673</Version>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.1.0.671</PackageVersion>
+        <PackageVersion>1.1.0.673</PackageVersion>
         <Title>Cabrones.UtilForTest</Title>
         <Authors>sergio@cabral.br.com</Authors>
         <Description>Utils for tests</Description>

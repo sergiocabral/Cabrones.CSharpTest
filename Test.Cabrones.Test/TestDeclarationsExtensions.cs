@@ -44,13 +44,13 @@ namespace Cabrones.Test
         [InlineData(typeof(ClassePai), 0)]
         [InlineData(typeof(ClasseFilha), 4)]
         [InlineData(typeof(ClasseNeta), 7)]
-        public void AssertOwnPublicPropertiesCount_deve_funcionar_corretamente(Type tipo, int totalEsperado)
+        public void AssertMyOwnPublicPropertiesCount_deve_funcionar_corretamente(Type tipo, int totalEsperado)
         {
             // Arrange, Given
             // Act, When
             // Assert, Then
             
-            tipo.AssertOwnPublicPropertiesCount(totalEsperado);
+            tipo.AssertMyOwnPublicPropertiesCount(totalEsperado);
         }
         
         [Theory]
@@ -61,13 +61,13 @@ namespace Cabrones.Test
         [InlineData(typeof(ClassePai), 3)]
         [InlineData(typeof(ClasseFilha), 0)]
         [InlineData(typeof(ClasseNeta), 1)]
-        public void AssertOwnPublicMethodsCount_deve_funcionar_corretamente(Type tipo, int totalEsperado)
+        public void AssertMyOwnPublicMethodsCount_deve_funcionar_corretamente(Type tipo, int totalEsperado)
         {
             // Arrange, Given
             // Act, When
             // Assert, Then
             
-            tipo.AssertOwnPublicMethodsCount(totalEsperado);
+            tipo.AssertMyOwnPublicMethodsCount(totalEsperado);
         }
         
         [Theory]

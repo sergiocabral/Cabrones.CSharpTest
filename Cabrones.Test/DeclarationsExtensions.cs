@@ -29,7 +29,7 @@ namespace Cabrones.Test
         /// </summary>
         /// <param name="type">Tipo.</param>
         /// <param name="count">Total de esperado.</param>
-        public static void AssertOwnPublicPropertiesCount(this Type type, int count)
+        public static void AssertMyOwnPublicPropertiesCount(this Type type, int count)
         {
             var own = type.MyOwnProperties().Where(a => a.IsPublic).ToList();
             own.Should().HaveCount(count);
@@ -42,7 +42,7 @@ namespace Cabrones.Test
         /// </summary>
         /// <param name="type">Tipo.</param>
         /// <param name="count">Total de esperado.</param>
-        public static void AssertOwnPublicMethodsCount(this Type type, int count)
+        public static void AssertMyOwnPublicMethodsCount(this Type type, int count)
         {
             var own = type.MyOwnMethods().Where(a => a.IsPublic).ToList();
             own.Should().HaveCount(count);
