@@ -1,0 +1,112 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Cabrones.Utils.Reflection;
+using FluentAssertions;
+
+namespace Cabrones.Test
+{
+    /// <summary>
+    /// Extensões relacionadas teste de declarações via reflection.
+    /// </summary>
+    public static class DeclarationsExtensions
+    {
+        /// <summary>
+        /// Testar se a quantidade de valores em um enum está correta.
+        /// </summary>
+        /// <param name="type">Tipo.</param>
+        /// <param name="count">Total de esperado.</param>
+        public static void AssertEnumValuesCount(this Type type, int count)
+        {
+            if (!type.IsEnum) throw new ArgumentException();
+            Enum.GetNames(type).Should().HaveCount(count);
+        }
+
+        /// <summary>
+        /// Testa se a quantidade de propriedades próprios públicas está correta.
+        /// Não considera interface ou herança.
+        /// Inclui membros estáticos e da instância.
+        /// </summary>
+        /// <param name="type">Tipo.</param>
+        /// <param name="count">Total de esperado.</param>
+        public static void AssertOwnPublicPropertiesCount(this Type type, int count)
+        {
+            var own = type.MyOwnProperties().Where(a => a.IsPublic).ToList();
+            own.Should().HaveCount(count);
+        }
+
+        /// <summary>
+        /// Testa se a quantidade de métodos próprios públicos está correta.
+        /// Não considera interface ou herança.
+        /// Inclui membros estáticos e da instância.
+        /// </summary>
+        /// <param name="type">Tipo.</param>
+        /// <param name="count">Total de esperado.</param>
+        public static void AssertOwnPublicMethodsCount(this Type type, int count)
+        {
+            var own = type.MyOwnMethods().Where(a => a.IsPublic).ToList();
+            own.Should().HaveCount(count);
+        }
+        
+        /// <summary>
+        /// Testa se uma propriedade existe declarado no tipo.
+        /// </summary>
+        /// <param name="type">Tipo.</param>
+        /// <param name="signature">Assinatura esperada.</param>
+        public static void AssertPublicPropertyPresence(this Type type, string signature)
+        {
+            var signatures = type
+                .AllProperties().Where(a => a.IsPublic)
+                .Select(a => a.GetProperty()).Distinct()
+                .Select(a => a?.ToSignatureCSharp()).ToList();
+            signatures.Should().Contain(signature);
+        }
+        
+        /// <summary>
+        /// Testa se um método existe declarado no tipo.
+        /// </summary>
+        /// <param name="type">Tipo.</param>
+        /// <param name="signature">Assinatura esperada.</param>
+        public static void AssertPublicMethodPresence(this Type type, string signature)
+        {
+            var signatures = type.AllMethods().Where(a => a.IsPublic).Select(a => a.ToSignatureCSharp()).ToList();
+            signatures.Should().Contain(signature);
+        }
+        
+        /// <summary>
+        /// Testa se todas as implementações de um tipo estão corretas.
+        /// </summary>
+        /// <param name="type">Tipo.</param>
+        /// <param name="implementations">Classe base e interfaces.</param>
+        public static void AssertMyImplementations(this Type type, params Type[] implementations)
+        {
+            // ReSharper disable once SuggestVarOrType_SimpleTypes
+            Type? loopType = type;
+            var myImplementations = new List<Type?>();
+            while (loopType != null)
+            {
+                myImplementations.Add(loopType.BaseType);
+                myImplementations.AddRange(loopType.GetInterfaces());
+                loopType = loopType.BaseType;
+            }
+            myImplementations = myImplementations.Where(a => a != null && a != typeof(object)).Distinct().ToList();
+            
+            myImplementations.Should().BeEquivalentTo(implementations.ToList());
+        }
+        
+        /// <summary>
+        /// Testa se as implementações diretamente em um tipo estão corretas.
+        /// </summary>
+        /// <param name="type">Tipo.</param>
+        /// <param name="implementations">Classe base e interfaces.</param>
+        public static void AssertMyOwnImplementations(this Type type, params Type[] implementations)
+        {
+            var myInterfaces = type.GetInterfaces();
+            var myOwnInterfaces = myInterfaces.Except(type.BaseType?.GetInterfaces() ?? new Type[0]);
+            var myOwnImplementations = myOwnInterfaces.Union(new[] {type.BaseType}).Where(a => a != null && a != typeof(object))
+                .ToList();
+            
+            myOwnImplementations.Should().BeEquivalentTo(implementations.ToList());
+        }
+    }
+}
