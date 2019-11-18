@@ -129,6 +129,8 @@ namespace Cabrones.Test
         [InlineData(typeof(ClasseFilha), true, typeof(ClassePai), typeof(IInterface3), typeof(IInterface1), typeof(IInterface2))]
         [InlineData(typeof(ClasseNeta), false, typeof(ClasseFilha))]
         [InlineData(typeof(ClasseNeta), true, typeof(ClasseFilha), typeof(ClassePai), typeof(IInterface1), typeof(IInterface2), typeof(IInterface3))]
+        [InlineData(typeof(ClasseSozinha), true)]
+        [InlineData(typeof(ClasseSozinha), false, typeof(object))]
         public void AssertMyImplementations_deve_funcionar_corretamente(Type tipo, bool estáCorreto, params Type[] implementações)
         {
             // Arrange, Given
@@ -154,7 +156,9 @@ namespace Cabrones.Test
         [InlineData(typeof(ClassePai), true, typeof(IInterface1), typeof(IInterface2))]
         [InlineData(typeof(ClasseFilha), true, typeof(ClassePai), typeof(IInterface3))]
         [InlineData(typeof(ClasseFilha), false, typeof(ClassePai), typeof(IInterface3), typeof(IInterface1), typeof(IInterface2))]
-        public void AssertImplementations_deve_funcionar_corretamente(Type tipo, bool estáCorreto, params Type[] implementações)
+        [InlineData(typeof(ClasseSozinha), true)]
+        [InlineData(typeof(ClasseSozinha), false, typeof(object))]
+        public void AssertMyOwnImplementations_deve_funcionar_corretamente(Type tipo, bool estáCorreto, params Type[] implementações)
         {
             // Arrange, Given
             // Act, When

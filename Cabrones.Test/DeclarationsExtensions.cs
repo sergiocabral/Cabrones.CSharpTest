@@ -49,6 +49,17 @@ namespace Cabrones.Test
         }
         
         /// <summary>
+        /// Testa se as implementações diretamente em um tipo estão corretas.
+        /// </summary>
+        /// <param name="type">Tipo.</param>
+        /// <param name="implementations">Classe base e interfaces.</param>
+        public static void AssertMyOwnImplementations(this Type type, params Type[] implementations)
+        {
+            var myOwnImplementations = type.MyOwnImplementations().ToList();
+            myOwnImplementations.Should().BeEquivalentTo(implementations.ToList());
+        }
+        
+        /// <summary>
         /// Testa se uma propriedade existe declarado no tipo.
         /// </summary>
         /// <param name="type">Tipo.</param>
@@ -92,21 +103,6 @@ namespace Cabrones.Test
             myImplementations = myImplementations.Where(a => a != null && a != typeof(object)).Distinct().ToList();
             
             myImplementations.Should().BeEquivalentTo(implementations.ToList());
-        }
-        
-        /// <summary>
-        /// Testa se as implementações diretamente em um tipo estão corretas.
-        /// </summary>
-        /// <param name="type">Tipo.</param>
-        /// <param name="implementations">Classe base e interfaces.</param>
-        public static void AssertMyOwnImplementations(this Type type, params Type[] implementations)
-        {
-            var myInterfaces = type.GetInterfaces();
-            var myOwnInterfaces = myInterfaces.Except(type.BaseType?.GetInterfaces() ?? new Type[0]);
-            var myOwnImplementations = myOwnInterfaces.Union(new[] {type.BaseType}).Where(a => a != null && a != typeof(object))
-                .ToList();
-            
-            myOwnImplementations.Should().BeEquivalentTo(implementations.ToList());
         }
     }
 }

@@ -146,4 +146,9 @@
         
         public static IDictionary<string[,],string[][][]> PropriedadeComplicada { get; set; }
     }
+
+    internal class ClasseSozinha
+    {
+        
+    }
 }
