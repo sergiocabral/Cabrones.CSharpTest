@@ -16,7 +16,13 @@ namespace Cabrones.Test
         /// <summary>
         /// Instância para Fixture.
         /// </summary>
-        private static readonly Fixture FixtureDefault = new Fixture();
+        private static Fixture? _fixtureDefault;
+
+        /// <summary>
+        /// Instância para Fixture.
+        /// Criado instância apenas na primeira vez que usar.
+        /// </summary>
+        private static Fixture FixtureDefault => _fixtureDefault ??= new Fixture();
 
         /// <summary>
         /// Criador de valores para tipos.
@@ -54,26 +60,29 @@ namespace Cabrones.Test
         /// Cria um valor qualquer para um tipo.
         /// </summary>
         /// <param name="type">Tipo.</param>
+        /// <param name="count">Total de instâncias para criar.</param>
         /// <returns>Valor criado.</returns>
-        public static IEnumerable<object> FixtureMany(this Type type)
+        public static IEnumerable<object> FixtureMany(this Type type, int count = 3)
         {
             var method = typeof(SpecimenFactory).GetMethods()
                 .Single(a => a.Name == "CreateMany" &&
                              a.IsGenericMethod &&
-                             a.GetParameters().Length == 1 &&
-                             a.GetParameters()[0].ParameterType == typeof(ISpecimenBuilder));
+                             a.GetParameters().Length == 2 &&
+                             a.GetParameters()[0].ParameterType == typeof(ISpecimenBuilder) &&
+                             a.GetParameters()[1].ParameterType == typeof(int));
             var methodGeneric = method.MakeGenericMethod(type);
-            return ((IEnumerable) methodGeneric.Invoke(null, new object[] {FixtureDefault})!).Cast<object>();
+            return ((IEnumerable) methodGeneric.Invoke(null, new object[] {FixtureDefault, count})!).Cast<object>();
         }
 
         /// <summary>
         /// Cria um valor qualquer para um tipo.
         /// </summary>
         /// <param name="_">Não utilizado.</param>
+        /// <param name="count">Total de instâncias para criar.</param>
         /// <typeparam name="T">Tipo.</typeparam>
         /// <returns>Valor criado.</returns>
         // ReSharper disable once UnusedParameter.Global
-        public static IEnumerable<T> FixtureMany<T>(this object _) =>
-            FixtureMany(typeof(T)).Select(a => (T)a);
+        public static IEnumerable<T> FixtureMany<T>(this object _, int count = 3) =>
+            FixtureMany(typeof(T), count).Select(a => (T)a);
     }
 }

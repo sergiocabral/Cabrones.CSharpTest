@@ -1,5 +1,7 @@
 ﻿ using System;
  using System.Collections.Generic;
+ using System.Diagnostics.CodeAnalysis;
+
 // ReSharper disable MemberCanBeMadeStatic.Global
 // ReSharper disable UnusedMember.Global
 // ReSharper disable UnusedParameter.Global
@@ -47,6 +49,7 @@
         new byte PropriedadeConcorrente { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     internal abstract class ClassePai : IInterface1, IInterface2
     {
         public string Interface1Método() => string.Empty;
@@ -73,6 +76,7 @@
         public abstract string ClassePaiMétodoAbstratoPúblico();
     }
 
+    [ExcludeFromCodeCoverage]
     internal class ClasseFilha : ClassePai, IInterface3
     {
         public string Interface3Método() => string.Empty;
@@ -94,6 +98,7 @@
         private static int ClasseFilhaPropriedadePrivadaEstática { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     internal class ClasseNeta : ClasseFilha
     {
         public int ClasseNetaPropriedadePúblicaInstância
@@ -147,6 +152,7 @@
         public static IDictionary<string[,],string[][][]> PropriedadeComplicada { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     internal class ClasseSozinha
     {
         

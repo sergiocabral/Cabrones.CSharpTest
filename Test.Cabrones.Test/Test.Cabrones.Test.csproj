@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.0</TargetFramework>
         <IsPackable>false</IsPackable>
-        <Version>1.0.0.122</Version>
+        <Version>1.0.0.134</Version>
         <RootNamespace>Cabrones.Test</RootNamespace>
     </PropertyGroup>
 

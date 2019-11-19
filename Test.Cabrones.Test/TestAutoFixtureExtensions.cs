@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FluentAssertions;
 using Xunit;
 
@@ -71,6 +72,8 @@ namespace Cabrones.Test
         {
             // Arrange, Given
 
+            var random = new Random(DateTime.Now.Millisecond);
+            
             var tipoString1 = typeof(string);
             var tipoString2 = typeof(string);
             var tipoInteiro1 = typeof(int);
@@ -78,10 +81,10 @@ namespace Cabrones.Test
 
             // Act, When
 
-            var valorString1 = tipoString1.FixtureMany().ToList();
-            var valorString2 = tipoString2.FixtureMany().ToList();
-            var valorInteiro1 = tipoInteiro1.FixtureMany().ToList();
-            var valorInteiro2 = tipoInteiro2.FixtureMany().ToList();
+            var valorString1 = tipoString1.FixtureMany(random.Next(1, 20)).ToList();
+            var valorString2 = tipoString2.FixtureMany(random.Next(1, 20)).ToList();
+            var valorInteiro1 = tipoInteiro1.FixtureMany(random.Next(1, 20)).ToList();
+            var valorInteiro2 = tipoInteiro2.FixtureMany(random.Next(1, 20)).ToList();
 
             // Assert, Then
 
@@ -92,7 +95,7 @@ namespace Cabrones.Test
         }
         
         [Fact]
-        public void FixtureMany_deve_estar_acessível_de_qualquer_lugar_e_criar_valor_aleatório_de_qualquer_tipo()
+        public void FixtureMany_sem_parâmetro_deve_estar_acessível_de_qualquer_lugar_e_criar_valor_aleatório_de_qualquer_tipo()
         {
             // Arrange, Given
             // Act, When
@@ -101,6 +104,23 @@ namespace Cabrones.Test
             var valorString2 = this.FixtureMany<string>();
             var valorInteiro1 = this.FixtureMany<int>();
             var valorInteiro2 = this.FixtureMany<int>();
+
+            // Assert, Then
+
+            valorString1.Should().NotBeEquivalentTo(valorString2);
+            valorInteiro1.Should().NotBeEquivalentTo(valorInteiro2);
+        }
+        
+        [Fact]
+        public void FixtureMany_informando_total_de_resultados_deve_estar_acessível_de_qualquer_lugar_e_criar_valor_aleatório_de_qualquer_tipo()
+        {
+            // Arrange, Given
+            // Act, When
+
+            var valorString1 = this.FixtureMany<string>(3);
+            var valorString2 = this.FixtureMany<string>(3);
+            var valorInteiro1 = this.FixtureMany<int>(3);
+            var valorInteiro2 = this.FixtureMany<int>(3);
 
             // Assert, Then
 

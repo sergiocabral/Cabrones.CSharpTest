@@ -79,9 +79,8 @@ namespace Cabrones.Test
         public static void AssertTheSameValueButTheSecondTimeIsFaster(this Type type, string propertyName)
         {
             var property = type.GetProperty(propertyName,
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
-            
-            if (property == null) throw new NullReferenceException();
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static) ??
+                throw new NullReferenceException();
             
             Func<object?> getValue = () => property.GetValue(null);
             
@@ -98,9 +97,8 @@ namespace Cabrones.Test
         public static void AssertTheSameValueButTheSecondTimeIsFaster(this object instance, string propertyName)
         {
             var property = instance.GetType().GetProperty(propertyName,
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            
-            if (property == null) throw new NullReferenceException();
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance) ??
+                           throw new NullReferenceException();
             
             Func<object?> getValue = () => property.GetValue(instance);
             
