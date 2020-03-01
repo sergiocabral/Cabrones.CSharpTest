@@ -21,6 +21,21 @@ namespace Cabrones.Test
             if (!type.IsEnum) throw new ArgumentException();
             Enum.GetNames(type).Should().HaveCount(count, nameof(AssertEnumValuesCount));
         }
+        
+        /// <summary>
+        /// Testar se os valores existem em um enum.
+        /// </summary>
+        /// <param name="type">Tipo.</param>
+        /// <param name="values">Valores que devem estar presentes no enum.</param>
+        public static void AssertEnumValuesContains(this Type type, params string[] values)
+        {
+            if (!type.IsEnum) throw new ArgumentException();
+            var allValues = Enum.GetNames(type);
+            foreach (var value in values)
+            {
+                allValues.Should().Contain(value);
+            }
+        }
 
         /// <summary>
         /// Testa se a quantidade de propriedades próprios públicas está correta.

@@ -36,6 +36,51 @@ namespace Cabrones.Test
             tipoEnum.AssertEnumValuesCount(totalEsperado);
         }
         
+        [Fact]
+        public void AssertEnumValuesContains_só_deve_funcionar_com_Enum()
+        {
+            // Arrange, Given
+
+            var tipoCorreto = typeof(EnumList);
+            var tipoIncorreto = typeof(string);
+
+            // Act, When
+
+            Action deveFuncionar = () => tipoCorreto.AssertEnumValuesContains();
+            Action nãoDeveFuncionar = () => tipoIncorreto.AssertEnumValuesContains();
+
+            // Assert, Then
+            
+            deveFuncionar.Should().NotThrow();
+            nãoDeveFuncionar.Should().ThrowExactly<ArgumentException>();
+        }
+        
+        [Theory]
+        [InlineData(typeof(EnumList), true, "EnumItem1")]
+        [InlineData(typeof(EnumList), true, "EnumItem1", "EnumItem2")]
+        [InlineData(typeof(EnumList), true, "EnumItem1", "EnumItem2", "EnumItem3")]
+        [InlineData(typeof(EnumList), true, "EnumItem1", "EnumItem2", "EnumItem3", "EnumItem4")]
+        [InlineData(typeof(EnumList), false, "EnumItem1", "EnumItem2", "EnumItem3", "EnumItem4", "EnumItem5")]
+        [InlineData(typeof(EnumList), false, "NotExists")]
+        public void AssertEnumValuesContains_deve_funcionar_corretamente(Type tipoEnum, bool result, params string[] valores)
+        {
+            // Arrange, Given
+            // Act, When
+            
+            Action executar = () => tipoEnum.AssertEnumValuesContains(valores);
+            
+            // Assert, Then
+
+            if (result)
+            {
+                executar.Should().NotThrow();
+            }
+            else
+            {
+                executar.Should().Throw<Exception>();
+            }
+        }
+        
         [Theory]
         [InlineData(typeof(EnumList), 0)]
         [InlineData(typeof(IInterface1), 4)]
