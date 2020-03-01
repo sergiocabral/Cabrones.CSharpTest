@@ -3,11 +3,11 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.0</TargetFramework>
         <IsPackable>true</IsPackable>
-        <Version>1.4.0.709</Version>
+        <Version>1.4.0.714</Version>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.4.0.709</PackageVersion>
+        <PackageVersion>1.4.0.714</PackageVersion>
         <Title>Cabrones.UtilForTest</Title>
         <Authors>sergio@cabral.br.com</Authors>
         <Description>Utils for tests</Description>
@@ -23,7 +23,7 @@
     </Target>
 
     <ItemGroup>
-        <PackageReference Include="Cabrones.Utils" Version="2.2.3.158" />
+        <PackageReference Include="Cabrones.Utils" Version="2.2.3.165" />
         <PackageReference Include="FluentAssertions" Version="5.9.0" />
         <PackageReference Include="AutoFixture" Version="4.11.0" />
         <PackageReference Include="NSubstitute" Version="4.2.1" />

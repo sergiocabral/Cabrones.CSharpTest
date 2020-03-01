@@ -121,9 +121,9 @@ namespace Cabrones.Test
         [InlineData(typeof(IInterface1), "Int32 Interface1Propriedade { set; }", false)]
         [InlineData(typeof(IInterface2), "Int32 Interface1Propriedade { get; set; }", false)]
         [InlineData(typeof(ClasseNeta), "Int32 ClasseNetaPropriedadePúblicaInstância { set; }", true)]
-        [InlineData(typeof(ClasseNeta), "Int32 ClasseNetaPropriedadePúblicaComCacheEstática { get; }", true)]
-        [InlineData(typeof(ClasseNeta), "Int32 ClasseNetaPropriedadePúblicaComCacheEstática { get; set; }", false)]
-        [InlineData(typeof(ClasseNeta), "IDictionary<String[,], String[][][]> PropriedadeComplicada { get; set; }", true)]
+        [InlineData(typeof(ClasseNeta), "static Int32 ClasseNetaPropriedadePúblicaComCacheEstática { get; }", true)]
+        [InlineData(typeof(ClasseNeta), "static Int32 ClasseNetaPropriedadePúblicaComCacheEstática { get; set; }", false)]
+        [InlineData(typeof(ClasseNeta), "static IDictionary<String[,], String[][][]> PropriedadeComplicada { get; set; }", true)]
         public void AssertPublicPropertyPresence_deve_funcionar_corretamente(Type tipo, string assinatura, bool existe)
         {
             // Arrange, Given
@@ -147,6 +147,7 @@ namespace Cabrones.Test
         [InlineData(typeof(IInterface1), "String Interface1Método()", true)]
         [InlineData(typeof(IInterface2), "String Interface1Método()", false)]
         [InlineData(typeof(ClasseNeta), "TTipo[] MétodoGeneric<TTipo>(String, TTipo, TTipo[])", true)]
+        [InlineData(typeof(ClasseEstática), "static DateTime Agora()", true)]
         public void AssertPublicMethodPresence_deve_funcionar_corretamente(Type tipo, string assinatura, bool existe)
         {
             // Arrange, Given
