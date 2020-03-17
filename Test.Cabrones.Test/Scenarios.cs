@@ -158,6 +158,7 @@
         
     }
 
+    [ExcludeFromCodeCoverage]
     internal static class ClasseEstática
     {
         public static DateTime Agora() =>
