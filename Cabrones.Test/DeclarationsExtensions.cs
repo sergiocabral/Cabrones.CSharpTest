@@ -7,12 +7,12 @@ using FluentAssertions;
 namespace Cabrones.Test
 {
     /// <summary>
-    /// Extensões relacionadas teste de declarações via reflection.
+    ///     Extensões relacionadas teste de declarações via reflection.
     /// </summary>
     public static class DeclarationsExtensions
     {
         /// <summary>
-        /// Testar se a quantidade de valores em um enum está correta.
+        ///     Testar se a quantidade de valores em um enum está correta.
         /// </summary>
         /// <param name="type">Tipo.</param>
         /// <param name="count">Total de esperado.</param>
@@ -21,9 +21,9 @@ namespace Cabrones.Test
             if (!type.IsEnum) throw new ArgumentException();
             Enum.GetNames(type).Should().HaveCount(count, nameof(AssertEnumValuesCount));
         }
-        
+
         /// <summary>
-        /// Testar se os valores existem em um enum.
+        ///     Testar se os valores existem em um enum.
         /// </summary>
         /// <param name="type">Tipo.</param>
         /// <param name="values">Valores que devem estar presentes no enum.</param>
@@ -31,16 +31,13 @@ namespace Cabrones.Test
         {
             if (!type.IsEnum) throw new ArgumentException();
             var allValues = Enum.GetNames(type);
-            foreach (var value in values)
-            {
-                allValues.Should().Contain(value);
-            }
+            foreach (var value in values) allValues.Should().Contain(value);
         }
 
         /// <summary>
-        /// Testa se a quantidade de propriedades próprios públicas está correta.
-        /// Não considera interface ou herança.
-        /// Inclui membros estáticos e da instância.
+        ///     Testa se a quantidade de propriedades próprios públicas está correta.
+        ///     Não considera interface ou herança.
+        ///     Inclui membros estáticos e da instância.
         /// </summary>
         /// <param name="type">Tipo.</param>
         /// <param name="count">Total de esperado.</param>
@@ -51,9 +48,9 @@ namespace Cabrones.Test
         }
 
         /// <summary>
-        /// Testa se a quantidade de métodos próprios públicos está correta.
-        /// Não considera interface ou herança.
-        /// Inclui membros estáticos e da instância.
+        ///     Testa se a quantidade de métodos próprios públicos está correta.
+        ///     Não considera interface ou herança.
+        ///     Inclui membros estáticos e da instância.
         /// </summary>
         /// <param name="type">Tipo.</param>
         /// <param name="count">Total de esperado.</param>
@@ -62,9 +59,9 @@ namespace Cabrones.Test
             var own = type.MyOwnMethods().Where(a => a.IsPublic).ToList();
             own.Should().HaveCount(count, nameof(AssertMyOwnPublicMethodsCount));
         }
-        
+
         /// <summary>
-        /// Testa se as implementações diretamente em um tipo estão corretas.
+        ///     Testa se as implementações diretamente em um tipo estão corretas.
         /// </summary>
         /// <param name="type">Tipo.</param>
         /// <param name="implementations">Classe base e interfaces.</param>
@@ -73,9 +70,9 @@ namespace Cabrones.Test
             var myOwnImplementations = type.MyOwnImplementations().ToList();
             myOwnImplementations.Should().BeEquivalentTo(implementations.ToList(), nameof(AssertMyOwnImplementations));
         }
-        
+
         /// <summary>
-        /// Testa se uma propriedade existe declarado no tipo.
+        ///     Testa se uma propriedade existe declarado no tipo.
         /// </summary>
         /// <param name="type">Tipo.</param>
         /// <param name="signature">Assinatura esperada.</param>
@@ -87,9 +84,9 @@ namespace Cabrones.Test
                 .Select(a => a?.ToSignatureCSharp()).ToList();
             signatures.Should().Contain(signature, nameof(AssertPublicPropertyPresence));
         }
-        
+
         /// <summary>
-        /// Testa se um método existe declarado no tipo.
+        ///     Testa se um método existe declarado no tipo.
         /// </summary>
         /// <param name="type">Tipo.</param>
         /// <param name="signature">Assinatura esperada.</param>
@@ -98,9 +95,9 @@ namespace Cabrones.Test
             var signatures = type.AllMethods().Where(a => a.IsPublic).Select(a => a.ToSignatureCSharp()).ToList();
             signatures.Should().Contain(signature, nameof(AssertPublicMethodPresence));
         }
-        
+
         /// <summary>
-        /// Testa se todas as implementações de um tipo estão corretas.
+        ///     Testa se todas as implementações de um tipo estão corretas.
         /// </summary>
         /// <param name="type">Tipo.</param>
         /// <param name="implementations">Classe base e interfaces.</param>
@@ -115,8 +112,9 @@ namespace Cabrones.Test
                 myImplementations.AddRange(loopType.GetInterfaces());
                 loopType = loopType.BaseType;
             }
+
             myImplementations = myImplementations.Where(a => a != null && a != typeof(object)).Distinct().ToList();
-            
+
             myImplementations.Should().BeEquivalentTo(implementations.ToList(), nameof(AssertMyImplementations));
         }
     }
