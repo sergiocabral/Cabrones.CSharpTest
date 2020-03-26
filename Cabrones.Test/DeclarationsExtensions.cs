@@ -67,8 +67,18 @@ namespace Cabrones.Test
         /// <param name="implementations">Classe base e interfaces.</param>
         public static void AssertMyOwnImplementations(this Type type, params Type[] implementations)
         {
-            var myOwnImplementations = type.MyOwnImplementations().ToList();
-            myOwnImplementations.Should().BeEquivalentTo(implementations.ToList(), nameof(AssertMyOwnImplementations));
+            var myOwnImplementationsAsString = type
+                .MyOwnImplementations()
+                .Select(a => a.ToString())
+                .ToArray();
+
+            var implementationsAsString = implementations
+                .Select(a => a.ToString())
+                .ToArray();
+
+            myOwnImplementationsAsString.Should()
+                .BeEquivalentTo(implementationsAsString.ToList(), 
+                    nameof(AssertMyOwnImplementations));
         }
 
         /// <summary>
@@ -115,7 +125,10 @@ namespace Cabrones.Test
 
             myImplementations = myImplementations.Where(a => a != null && a != typeof(object)).Distinct().ToList();
 
-            myImplementations.Should().BeEquivalentTo(implementations.ToList(), nameof(AssertMyImplementations));
+            var myImplementationsAsString = myImplementations.Select(a => a.ToString()).ToList();
+            var implementationsAsString = implementations.Select(a => a.ToString()).ToList();
+
+            myImplementationsAsString.Should().BeEquivalentTo(implementationsAsString.ToList(), nameof(AssertMyImplementations));
         }
     }
 }

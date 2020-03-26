@@ -132,6 +132,8 @@ namespace Cabrones.Test
             typeof(IInterface2), typeof(IInterface3))]
         [InlineData(typeof(ClasseSozinha), true)]
         [InlineData(typeof(ClasseSozinha), false, typeof(object))]
+        [InlineData(typeof(ClasseGenérica<>), true, typeof(InterfaceGenerica<>))]
+        [InlineData(typeof(ClasseGenérica<string>), true, typeof(InterfaceGenerica<string>))]
         public void AssertMyImplementations_deve_funcionar_corretamente(Type tipo, bool estáCorreto,
             params Type[] implementações)
         {
@@ -157,6 +159,8 @@ namespace Cabrones.Test
             typeof(IInterface2))]
         [InlineData(typeof(ClasseSozinha), true)]
         [InlineData(typeof(ClasseSozinha), false, typeof(object))]
+        [InlineData(typeof(ClasseGenérica<>), true, typeof(InterfaceGenerica<>))]
+        [InlineData(typeof(ClasseGenérica<string>), true, typeof(InterfaceGenerica<string>))]
         public void AssertMyOwnImplementations_deve_funcionar_corretamente(Type tipo, bool estáCorreto,
             params Type[] implementações)
         {

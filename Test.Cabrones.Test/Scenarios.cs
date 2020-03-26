@@ -193,4 +193,13 @@ namespace Cabrones.Test
             return DateTime.Now;
         }
     }
+
+    public interface InterfaceGenerica<TService>
+    {
+    }
+
+    [ExcludeFromCodeCoverage]
+    public class ClasseGenérica<TService> : InterfaceGenerica<TService>
+    {
+    }
 }
