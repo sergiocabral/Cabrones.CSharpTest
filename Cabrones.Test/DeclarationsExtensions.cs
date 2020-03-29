@@ -115,15 +115,15 @@ namespace Cabrones.Test
         {
             // ReSharper disable once SuggestVarOrType_SimpleTypes
             Type? loopType = type;
-            var myImplementations = new List<Type?>();
+            var myImplementations = new List<Type>();
             while (loopType != null)
             {
-                myImplementations.Add(loopType.BaseType);
+                if (loopType.BaseType != null) myImplementations.Add(loopType.BaseType);
                 myImplementations.AddRange(loopType.GetInterfaces());
                 loopType = loopType.BaseType;
             }
 
-            myImplementations = myImplementations.Where(a => a != null && a != typeof(object)).Distinct().ToList();
+            myImplementations = myImplementations.Where(a => a != typeof(object)).Distinct().ToList();
 
             var myImplementationsAsString = myImplementations.Select(a => a.ToString()).ToList();
             var implementationsAsString = implementations.Select(a => a.ToString()).ToList();

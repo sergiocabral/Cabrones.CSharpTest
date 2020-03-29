@@ -1,13 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.0</TargetFramework>
         <IsPackable>true</IsPackable>
-        <Version>1.4.0.720</Version>
+        <Version>1.4.0.742</Version>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.4.0.720</PackageVersion>
+        <PackageVersion>1.4.0.742</PackageVersion>
         <Title>Cabrones.UtilForTest</Title>
         <Authors>sergio@cabral.br.com</Authors>
         <Description>Utils for tests</Description>
@@ -15,7 +14,8 @@
         <PackageLicenseUrl>https://raw.githubusercontent.com/sergiocabral/Cabrones.CSharpTest/master/LICENSE.txt</PackageLicenseUrl>
         <PackageIconUrl>https://pt.gravatar.com/userimage/18417969/ae2007509611fb5b97b831bfc7e24ccd.jpeg</PackageIconUrl>
         <RepositoryUrl>https://github.com/sergiocabral/Cabrones.CSharpTest</RepositoryUrl>
-        <Copyright>sergiocabral.com</Copyright>        
+        <Copyright>sergiocabral.com</Copyright>
+        <TargetFrameworks>netstandard2.1;netcoreapp3.1</TargetFrameworks>        
     </PropertyGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
@@ -23,7 +23,7 @@
     </Target>
 
     <ItemGroup>
-        <PackageReference Include="Cabrones.Utils" Version="2.2.3.226" />
+        <PackageReference Include="Cabrones.Utils" Version="2.2.3.273" />
         <PackageReference Include="FluentAssertions" Version="5.9.0" />
         <PackageReference Include="AutoFixture" Version="4.11.0" />
         <PackageReference Include="NSubstitute" Version="4.2.1" />
