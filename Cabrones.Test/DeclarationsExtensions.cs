@@ -77,7 +77,7 @@ namespace Cabrones.Test
                 .ToArray();
 
             myOwnImplementationsAsString.Should()
-                .BeEquivalentTo(implementationsAsString.ToList(), 
+                .BeEquivalentTo(implementationsAsString.ToList(),
                     nameof(AssertMyOwnImplementations));
         }
 
@@ -128,7 +128,8 @@ namespace Cabrones.Test
             var myImplementationsAsString = myImplementations.Select(a => a.ToString()).ToList();
             var implementationsAsString = implementations.Select(a => a.ToString()).ToList();
 
-            myImplementationsAsString.Should().BeEquivalentTo(implementationsAsString.ToList(), nameof(AssertMyImplementations));
+            myImplementationsAsString.Should()
+                .BeEquivalentTo(implementationsAsString.ToList(), nameof(AssertMyImplementations));
         }
     }
 }
