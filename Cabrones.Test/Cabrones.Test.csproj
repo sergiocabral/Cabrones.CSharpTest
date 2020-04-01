@@ -2,11 +2,11 @@
 
     <PropertyGroup>
         <IsPackable>true</IsPackable>
-        <Version>1.5.0.767</Version>
+        <Version>1.5.0.770</Version>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.5.0.767</PackageVersion>
+        <PackageVersion>1.5.0.770</PackageVersion>
         <Title>Cabrones.UtilForTest</Title>
         <Authors>sergio@cabral.br.com</Authors>
         <Description>Utils for tests</Description>
@@ -25,7 +25,7 @@
 
     <ItemGroup>
         <PackageReference Include="Cabrones.Utils" Version="2.3.0.301" />
-        <PackageReference Include="FluentAssertions" Version="5.9.0" />
+        <PackageReference Include="FluentAssertions" Version="5.10.3" />
         <PackageReference Include="AutoFixture" Version="4.11.0" />
         <PackageReference Include="NSubstitute" Version="4.2.1" />
     </ItemGroup>
