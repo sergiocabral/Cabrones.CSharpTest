@@ -66,7 +66,7 @@ namespace Cabrones.Test
             var time1 = StopwatchFor(action);
             var time2 = StopwatchFor(action);
 
-            time2.Should().BeLessThan((long) (time1 * 0.99));
+            time2.Should().BeLessThan((long) (time1 * 0.9));
         }
 
         /// <summary>

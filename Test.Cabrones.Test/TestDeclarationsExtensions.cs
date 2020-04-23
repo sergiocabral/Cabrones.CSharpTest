@@ -166,6 +166,7 @@ namespace Cabrones.Test
         [InlineData(typeof(ClasseSozinha), false, typeof(object))]
         [InlineData(typeof(ClasseGenérica<>), true, typeof(InterfaceGenerica<>))]
         [InlineData(typeof(ClasseGenérica<string>), true, typeof(InterfaceGenerica<string>))]
+        [InlineData(typeof(InterfaceGenericaDuplaComUmaDefinida<>), true, typeof(InterfaceGenericaDupla<,>))]
         public void AssertMyOwnImplementations_deve_funcionar_corretamente(Type tipo, bool estáCorreto,
             params Type[] implementações)
         {

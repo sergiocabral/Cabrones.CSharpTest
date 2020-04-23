@@ -70,11 +70,11 @@ namespace Cabrones.Test
         {
             var myOwnImplementationsAsString = type
                 .MyOwnImplementations()
-                .Select(a => a.ToString())
+                .Select(a => RemoveGenericTypes(a.ToString()))
                 .ToArray();
 
             var implementationsAsString = implementations
-                .Select(a => a.ToString())
+                .Select(a => RemoveGenericTypes(a.ToString()))
                 .ToArray();
 
             myOwnImplementationsAsString.Should()
@@ -126,16 +126,25 @@ namespace Cabrones.Test
 
             myImplementations = myImplementations.Where(a => a != typeof(object)).Distinct().ToList();
 
-            const string regexRemoveGenericTypes = @"(?<=[\[,])[A-Za-z0-9_\.]+(?=[,\]])";
-            var myImplementationsAsString = myImplementations
-                .Select(a => 
-                    Regex.Replace(a.ToString(), regexRemoveGenericTypes, string.Empty)).ToList();
-            var implementationsAsString = implementations
-                .Select(a => 
-                    Regex.Replace(a.ToString(), regexRemoveGenericTypes, string.Empty)).ToList();
+
+            var myImplementationsAsString =
+                myImplementations.Select(a => RemoveGenericTypes(a.ToString())).ToList();
+            var implementationsAsString =
+                implementations.Select(a => RemoveGenericTypes(a.ToString())).ToList();
 
             myImplementationsAsString.Should()
                 .BeEquivalentTo(implementationsAsString.ToList(), nameof(AssertMyImplementations));
+        }
+
+        /// <summary>
+        ///     Remove de uma assinatura os tipos genéricos.
+        /// </summary>
+        /// <param name="signature">Assinatura</param>
+        /// <returns>Sinatura sem os tipos genéricos.</returns>
+        private static string RemoveGenericTypes(string signature)
+        {
+            const string regexRemoveGenericTypes = @"(?<=[\[,])[A-Za-z0-9_\.]+(?=[,\]])";
+            return Regex.Replace(signature, regexRemoveGenericTypes, string.Empty);
         }
     }
 }
