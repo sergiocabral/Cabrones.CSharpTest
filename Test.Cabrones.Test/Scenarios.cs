@@ -202,4 +202,12 @@ namespace Cabrones.Test
     public class ClasseGenérica<TService> : InterfaceGenerica<TService>
     {
     }
+
+    public interface InterfaceGenericaDupla<TUm1, TDois1>
+    {
+    }
+
+    public interface InterfaceGenericaDuplaComUmaDefinida<TUm2> : InterfaceGenericaDupla<TUm2, string>
+    {
+    }
 }

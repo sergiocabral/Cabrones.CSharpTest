@@ -87,6 +87,8 @@ namespace Cabrones.Test
             "static IDictionary<String[,], String[][][]> PropriedadeComplicada { get; set; }", true)]
         public void AssertPublicPropertyPresence_deve_funcionar_corretamente(Type tipo, string assinatura, bool existe)
         {
+            // TODO: Fazer uma verificação correta de propriedades com `private set` ou `private get`
+            
             // Arrange, Given
             // Act, When
 
@@ -107,6 +109,8 @@ namespace Cabrones.Test
         [InlineData(typeof(ClasseEstática), "static DateTime Agora()", true)]
         public void AssertPublicMethodPresence_deve_funcionar_corretamente(Type tipo, string assinatura, bool existe)
         {
+            //TODO: Criar uma verificação de eventos ao invés de localizar por métodos.
+            
             // Arrange, Given
             // Act, When
 
@@ -134,6 +138,7 @@ namespace Cabrones.Test
         [InlineData(typeof(ClasseSozinha), false, typeof(object))]
         [InlineData(typeof(ClasseGenérica<>), true, typeof(InterfaceGenerica<>))]
         [InlineData(typeof(ClasseGenérica<string>), true, typeof(InterfaceGenerica<string>))]
+        [InlineData(typeof(InterfaceGenericaDuplaComUmaDefinida<>), true, typeof(InterfaceGenericaDupla<,>))]
         public void AssertMyImplementations_deve_funcionar_corretamente(Type tipo, bool estáCorreto,
             params Type[] implementações)
         {

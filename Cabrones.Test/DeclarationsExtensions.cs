@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Cabrones.Utils.Reflection;
 using FluentAssertions;
 
@@ -125,8 +126,13 @@ namespace Cabrones.Test
 
             myImplementations = myImplementations.Where(a => a != typeof(object)).Distinct().ToList();
 
-            var myImplementationsAsString = myImplementations.Select(a => a.ToString()).ToList();
-            var implementationsAsString = implementations.Select(a => a.ToString()).ToList();
+            const string regexRemoveGenericTypes = @"(?<=[\[,])[A-Za-z0-9_\.]+(?=[,\]])";
+            var myImplementationsAsString = myImplementations
+                .Select(a => 
+                    Regex.Replace(a.ToString(), regexRemoveGenericTypes, string.Empty)).ToList();
+            var implementationsAsString = implementations
+                .Select(a => 
+                    Regex.Replace(a.ToString(), regexRemoveGenericTypes, string.Empty)).ToList();
 
             myImplementationsAsString.Should()
                 .BeEquivalentTo(implementationsAsString.ToList(), nameof(AssertMyImplementations));
