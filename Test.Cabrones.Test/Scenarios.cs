@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-
-// ReSharper disable MemberCanBeMadeStatic.Global
+﻿// ReSharper disable MemberCanBeMadeStatic.Global
 // ReSharper disable UnusedMember.Global
 // ReSharper disable UnusedParameter.Global
 // ReSharper disable UnusedMember.Local
 // ReSharper disable VirtualMemberNeverOverridden.Global
 // ReSharper disable UnassignedGetOnlyAutoProperty
 // ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable EventNeverSubscribedTo.Global
+// ReSharper disable EventNeverSubscribedTo.Local
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+#pragma warning disable 67
 
 namespace Cabrones.Test
 {
@@ -209,5 +212,28 @@ namespace Cabrones.Test
 
     public interface InterfaceGenericaDuplaComUmaDefinida<TUm2> : InterfaceGenericaDupla<TUm2, string>
     {
+    }
+
+    [ExcludeFromCodeCoverage]
+    public class ClasseComModificadoresDeAcesso
+    {
+        public int PropriedadeSetPrivate { get; private set; }
+        public int PropriedadeGetInternal { internal get; set; }
+        public int PropriedadeSetProtected { get; protected set; }
+    }
+
+    public interface InterfaceComEvento
+    {
+        public event Action EventoDaInterface;
+    }
+    
+    [ExcludeFromCodeCoverage]
+    public class ClasseComEvento: InterfaceComEvento
+    {
+        public event Action EventoDaInstância;
+        public static event Func<string, int> EventoEstático;
+        public event Action EventoDaInterface;
+        private event Action EventoPrivado;
+        protected event Action EventoProtegido;
     }
 }

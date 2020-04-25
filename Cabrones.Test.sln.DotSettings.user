@@ -2,9 +2,12 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\SergioCabral\.nuget\packages\cabrones.utils\2.2.3.295\lib\netstandard2.1\Cabrones.Utils.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6b072bff_002D9b3b_002D4f28_002D8d0e_002D128bfd671494/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0f2218a5_002D8068_002D439b_002Dacb5_002De6106ff37e90/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Solution /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
+	
+	
 	
 	
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Cabrones/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

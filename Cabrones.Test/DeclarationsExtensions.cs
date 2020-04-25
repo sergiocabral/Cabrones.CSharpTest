@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using Cabrones.Utils.Reflection;
 using FluentAssertions;
@@ -33,6 +34,19 @@ namespace Cabrones.Test
             if (!type.IsEnum) throw new ArgumentException();
             var allValues = Enum.GetNames(type);
             foreach (var value in values) allValues.Should().Contain(value);
+        }
+
+        /// <summary>
+        ///     Testa se a quantidade de propriedades próprios públicas está correta.
+        ///     Não considera interface ou herança.
+        ///     Inclui membros estáticos e da instância.
+        /// </summary>
+        /// <param name="type">Tipo.</param>
+        /// <param name="count">Total de esperado.</param>
+        public static void AssertMyOwnPublicEventsCount(this Type type, int count)
+        {
+            var own = type.MyOwnEvents().ToList();
+            own.Should().HaveCount(count, nameof(AssertMyOwnPublicEventsCount));
         }
 
         /// <summary>
@@ -80,6 +94,19 @@ namespace Cabrones.Test
             myOwnImplementationsAsString.Should()
                 .BeEquivalentTo(implementationsAsString.ToList(),
                     nameof(AssertMyOwnImplementations));
+        }
+
+        /// <summary>
+        ///     Testa se um evento existe declarado no tipo.
+        /// </summary>
+        /// <param name="type">Tipo.</param>
+        /// <param name="signature">Assinatura esperada.</param>
+        public static void AssertPublicEventPresence(this Type type, string signature)
+        {
+            var signatures = type
+                .AllEvents()
+                .Select(a => a?.ToSignatureCSharp()).ToList();
+            signatures.Should().Contain(signature, nameof(AssertPublicPropertyPresence));
         }
 
         /// <summary>

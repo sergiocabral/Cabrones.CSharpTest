@@ -42,12 +42,33 @@ namespace Cabrones.Test
 
         [Theory]
         [InlineData(typeof(EnumList), 0)]
+        [InlineData(typeof(IInterface1), 0)]
+        [InlineData(typeof(IInterface2), 0)]
+        [InlineData(typeof(IInterface3), 0)]
+        [InlineData(typeof(ClassePai), 0)]
+        [InlineData(typeof(ClasseFilha), 0)]
+        [InlineData(typeof(ClasseNeta), 0)]
+        [InlineData(typeof(ClasseComEvento), 2)]
+        [InlineData(typeof(InterfaceComEvento), 1)]
+        public void AssertMyOwnPublicEventsCount_deve_funcionar_corretamente(Type tipo, int totalEsperado)
+        {
+            // Arrange, Given
+            // Act, When
+            // Assert, Then
+
+            tipo.AssertMyOwnPublicEventsCount(totalEsperado);
+        }
+
+        [Theory]
+        [InlineData(typeof(EnumList), 0)]
         [InlineData(typeof(IInterface1), 4)]
         [InlineData(typeof(IInterface2), 4)]
         [InlineData(typeof(IInterface3), 4)]
         [InlineData(typeof(ClassePai), 0)]
         [InlineData(typeof(ClasseFilha), 4)]
         [InlineData(typeof(ClasseNeta), 7)]
+        [InlineData(typeof(ClasseComEvento), 0)]
+        [InlineData(typeof(InterfaceComEvento), 0)]
         public void AssertMyOwnPublicPropertiesCount_deve_funcionar_corretamente(Type tipo, int totalEsperado)
         {
             // Arrange, Given
@@ -65,6 +86,8 @@ namespace Cabrones.Test
         [InlineData(typeof(ClassePai), 3)]
         [InlineData(typeof(ClasseFilha), 0)]
         [InlineData(typeof(ClasseNeta), 1)]
+        [InlineData(typeof(ClasseComEvento), 0)]
+        [InlineData(typeof(InterfaceComEvento), 0)]
         public void AssertMyOwnPublicMethodsCount_deve_funcionar_corretamente(Type tipo, int totalEsperado)
         {
             // Arrange, Given
@@ -72,6 +95,25 @@ namespace Cabrones.Test
             // Assert, Then
 
             tipo.AssertMyOwnPublicMethodsCount(totalEsperado);
+        }
+
+        [Theory]
+        [InlineData(typeof(ClasseComEvento), "Action EventoDaInstância", true)]
+        [InlineData(typeof(ClasseComEvento), "static Func<String, Int32> EventoEstático", true)]
+        [InlineData(typeof(InterfaceComEvento), "Action EventoDaInterface", true)]
+        public void AssertPublicEventPresence_deve_funcionar_corretamente(Type tipo, string assinatura, bool existe)
+        {
+            // Arrange, Given
+            // Act, When
+
+            Action testar = () => tipo.AssertPublicEventPresence(assinatura);
+
+            // Assert, Then
+
+            if (existe)
+                testar.Should().NotThrow();
+            else
+                testar.Should().Throw<Exception>();
         }
 
         [Theory]
@@ -85,10 +127,14 @@ namespace Cabrones.Test
             false)]
         [InlineData(typeof(ClasseNeta),
             "static IDictionary<String[,], String[][][]> PropriedadeComplicada { get; set; }", true)]
+        [InlineData(typeof(ClasseComModificadoresDeAcesso), "Int32 PropriedadeSetPrivate { get; }", true)]
+        [InlineData(typeof(ClasseComModificadoresDeAcesso), "Int32 PropriedadeSetPrivate { get; set; }", false)]
+        [InlineData(typeof(ClasseComModificadoresDeAcesso), "Int32 PropriedadeGetInternal { set; }", true)]
+        [InlineData(typeof(ClasseComModificadoresDeAcesso), "Int32 PropriedadeGetInternal { get; set; }", false)]
+        [InlineData(typeof(ClasseComModificadoresDeAcesso), "Int32 PropriedadeSetProtected { get; }", true)]
+        [InlineData(typeof(ClasseComModificadoresDeAcesso), "Int32 PropriedadeSetProtected { get; set; }", false)]
         public void AssertPublicPropertyPresence_deve_funcionar_corretamente(Type tipo, string assinatura, bool existe)
         {
-            // TODO: Fazer uma verificação correta de propriedades com `private set` ou `private get`
-            
             // Arrange, Given
             // Act, When
 
