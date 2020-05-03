@@ -185,6 +185,8 @@ namespace Cabrones.Test
         [InlineData(typeof(ClasseGenérica<>), true, typeof(InterfaceGenerica<>))]
         [InlineData(typeof(ClasseGenérica<string>), true, typeof(InterfaceGenerica<string>))]
         [InlineData(typeof(InterfaceGenericaDuplaComUmaDefinida<>), true, typeof(InterfaceGenericaDupla<,>))]
+        [InlineData(typeof(ClasseComInterfaceRepetida), true, typeof(InterfaceGenericaDupla<,>))]
+        [InlineData(typeof(ClasseComInterfaceRepetida), false, typeof(InterfaceGenericaDupla<,>), typeof(InterfaceGenericaDupla<,>))]
         public void AssertMyImplementations_deve_funcionar_corretamente(Type tipo, bool estáCorreto,
             params Type[] implementações)
         {
@@ -213,6 +215,8 @@ namespace Cabrones.Test
         [InlineData(typeof(ClasseGenérica<>), true, typeof(InterfaceGenerica<>))]
         [InlineData(typeof(ClasseGenérica<string>), true, typeof(InterfaceGenerica<string>))]
         [InlineData(typeof(InterfaceGenericaDuplaComUmaDefinida<>), true, typeof(InterfaceGenericaDupla<,>))]
+        [InlineData(typeof(ClasseComInterfaceRepetida), true, typeof(InterfaceGenericaDupla<,>))]
+        [InlineData(typeof(ClasseComInterfaceRepetida), false, typeof(InterfaceGenericaDupla<,>), typeof(InterfaceGenericaDupla<,>))]
         public void AssertMyOwnImplementations_deve_funcionar_corretamente(Type tipo, bool estáCorreto,
             params Type[] implementações)
         {

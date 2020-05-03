@@ -236,4 +236,11 @@ namespace Cabrones.Test
         private event Action EventoPrivado;
         protected event Action EventoProtegido;
     }
+
+    public class ClasseComInterfaceRepetida : 
+        InterfaceGenericaDupla<int, int>,
+        InterfaceGenericaDupla<string, string>
+    {
+        
+    }
 }

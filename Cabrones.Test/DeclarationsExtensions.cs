@@ -85,6 +85,7 @@ namespace Cabrones.Test
             var myOwnImplementationsAsString = type
                 .MyOwnImplementations()
                 .Select(a => RemoveGenericTypes(a.ToString()))
+                .Distinct()
                 .ToArray();
 
             var implementationsAsString = implementations
@@ -155,7 +156,7 @@ namespace Cabrones.Test
 
 
             var myImplementationsAsString =
-                myImplementations.Select(a => RemoveGenericTypes(a.ToString())).ToList();
+                myImplementations.Select(a => RemoveGenericTypes(a.ToString())).Distinct().ToList();
             var implementationsAsString =
                 implementations.Select(a => RemoveGenericTypes(a.ToString())).ToList();
 
