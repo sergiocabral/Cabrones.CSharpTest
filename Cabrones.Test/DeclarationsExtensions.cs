@@ -154,7 +154,6 @@ namespace Cabrones.Test
 
             myImplementations = myImplementations.Where(a => a != typeof(object)).Distinct().ToList();
 
-
             var myImplementationsAsString =
                 myImplementations.Select(a => RemoveGenericTypes(a.ToString())).Distinct().ToList();
             var implementationsAsString =
@@ -171,7 +170,7 @@ namespace Cabrones.Test
         /// <returns>Sinatura sem os tipos genéricos.</returns>
         private static string RemoveGenericTypes(string signature)
         {
-            const string regexRemoveGenericTypes = @"(?<=[\[,])[A-Za-z0-9_\.]+(?=[,\]])";
+            const string regexRemoveGenericTypes = @"(?<=[\[,]).+(?=[,\]])";
             return Regex.Replace(signature, regexRemoveGenericTypes, string.Empty);
         }
     }

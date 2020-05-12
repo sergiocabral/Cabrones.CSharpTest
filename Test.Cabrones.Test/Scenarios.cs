@@ -243,4 +243,10 @@ namespace Cabrones.Test
     {
         
     }
+
+    public class ClasseComGenericsInternos : 
+        InterfaceGenericaDupla<Func<int>, Action<string>>
+    {
+        
+    }
 }
