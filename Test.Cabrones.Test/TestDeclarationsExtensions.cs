@@ -79,6 +79,23 @@ namespace Cabrones.Test
         }
 
         [Theory]
+        [InlineData(typeof(EnumList), 5)]
+        [InlineData(typeof(IInterface1), 0)]
+        [InlineData(typeof(Classe1ComCampo), 2)]
+        [InlineData(typeof(Classe2ComCampo), 4)]
+        [InlineData(typeof(Classe3ComCampo), 0)]
+        [InlineData(typeof(Classe4ComCamposDeExemplo<bool>), 5)]
+        [InlineData(typeof(Classe4ComCamposDeExemplo<>), 5)]
+        public void AssertMyOwnPublicFieldsCount_deve_funcionar_corretamente(Type tipo, int totalEsperado)
+        {
+            // Arrange, Given
+            // Act, When
+            // Assert, Then
+
+            tipo.AssertMyOwnPublicFieldsCount(totalEsperado);
+        }
+
+        [Theory]
         [InlineData(typeof(EnumList), 0)]
         [InlineData(typeof(IInterface1), 1)]
         [InlineData(typeof(IInterface2), 1)]
@@ -149,14 +166,40 @@ namespace Cabrones.Test
         }
 
         [Theory]
+        [InlineData(typeof(Classe4ComCamposDeExemplo<bool>), "Int32 CampoPúblico", true)]
+        [InlineData(typeof(Classe4ComCamposDeExemplo<bool>), "Int32 CampoPrivado", false)]
+        [InlineData(typeof(Classe4ComCamposDeExemplo<>), "Int32 CampoPúblico", true)]
+        [InlineData(typeof(Classe4ComCamposDeExemplo<>), "Int32 CampoPrivado", false)]
+        [InlineData(typeof(Classe4ComCamposDeExemplo<bool>), "Boolean CampoGenéricoPúblico", true)]
+        [InlineData(typeof(Classe4ComCamposDeExemplo<bool>), "Boolean CampoGenéricoPrivado", false)]
+        [InlineData(typeof(Classe4ComCamposDeExemplo<>), "TTipo CampoGenéricoPúblico", true)]
+        [InlineData(typeof(Classe4ComCamposDeExemplo<>), "TTipo CampoGenéricoPrivado", false)]
+        [InlineData(typeof(Classe4ComCamposDeExemplo<bool>), "Func<Boolean, String> CampoGenérico2Público", true)]
+        [InlineData(typeof(Classe4ComCamposDeExemplo<bool>), "Func<Boolean, String> CampoGenérico2Privado", false)]
+        [InlineData(typeof(Classe4ComCamposDeExemplo<>), "Func<TTipo, String> CampoGenérico2Público", true)]
+        [InlineData(typeof(Classe4ComCamposDeExemplo<>), "Func<TTipo, String> CampoGenérico2Privado", false)]
+        public void AssertPublicField_deve_funcionar_corretamente(Type tipo, string assinatura, bool existe)
+        {
+            // Arrange, Given
+            // Act, When
+
+            Action testar = () => tipo.AssertPublicFieldPresence(assinatura);
+
+            // Assert, Then
+
+            if (existe)
+                testar.Should().NotThrow();
+            else
+                testar.Should().Throw<Exception>();
+        }
+
+        [Theory]
         [InlineData(typeof(IInterface1), "String Interface1Método()", true)]
         [InlineData(typeof(IInterface2), "String Interface1Método()", false)]
         [InlineData(typeof(ClasseNeta), "TTipo[] MétodoGeneric<TTipo>(String, TTipo, TTipo[])", true)]
         [InlineData(typeof(ClasseEstática), "static DateTime Agora()", true)]
         public void AssertPublicMethodPresence_deve_funcionar_corretamente(Type tipo, string assinatura, bool existe)
         {
-            //TODO: Criar uma verificação de eventos ao invés de localizar por métodos.
-            
             // Arrange, Given
             // Act, When
 

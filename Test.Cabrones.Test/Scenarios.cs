@@ -11,6 +11,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+// ReSharper disable InconsistentNaming
+// ReSharper disable UnusedType.Global
+#pragma warning disable 649
+#pragma warning disable 108,114
+#pragma warning disable 169
 #pragma warning disable 67
 
 namespace Cabrones.Test
@@ -135,7 +140,7 @@ namespace Cabrones.Test
 
         public int ClasseNetaPropriedadePúblicaInstância
         {
-            set => throw new NotImplementedException();
+            set => throw new Exception();
         }
 
         public int ClasseNetaPropriedadePúblicaComCache
@@ -202,7 +207,7 @@ namespace Cabrones.Test
     }
 
     [ExcludeFromCodeCoverage]
-    public class ClasseGenérica<TService> : InterfaceGenerica<TService>
+    internal class ClasseGenérica<TService> : InterfaceGenerica<TService>
     {
     }
 
@@ -215,7 +220,7 @@ namespace Cabrones.Test
     }
 
     [ExcludeFromCodeCoverage]
-    public class ClasseComModificadoresDeAcesso
+    internal class ClasseComModificadoresDeAcesso
     {
         public int PropriedadeSetPrivate { get; private set; }
         public int PropriedadeGetInternal { internal get; set; }
@@ -228,7 +233,7 @@ namespace Cabrones.Test
     }
     
     [ExcludeFromCodeCoverage]
-    public class ClasseComEvento: InterfaceComEvento
+    internal class ClasseComEvento: InterfaceComEvento
     {
         public event Action EventoDaInstância;
         public static event Func<string, int> EventoEstático;
@@ -237,16 +242,53 @@ namespace Cabrones.Test
         protected event Action EventoProtegido;
     }
 
-    public class ClasseComInterfaceRepetida : 
+    internal class ClasseComInterfaceRepetida : 
         InterfaceGenericaDupla<int, int>,
         InterfaceGenericaDupla<string, string>
     {
         
     }
 
-    public class ClasseComGenericsInternos : 
+    internal class ClasseComGenericsInternos : 
         InterfaceGenericaDupla<Func<int>, Action<string>>
     {
         
+    }
+
+    [ExcludeFromCodeCoverage]
+    internal class Classe1ComCampo : Classe2ComCampo
+    {
+        private static string CampoPrivadoEstático;
+        public static string CampoPúblicoEstático;
+        private string CampoPrivado;
+        public string CampoPúblico;
+    }
+
+    [ExcludeFromCodeCoverage]
+    internal class Classe2ComCampo : Classe3ComCampo
+    {
+        private static string CampoPrivadoEstático;
+        public static string CampoPúblicoEstático;
+        private static string Campo2PrivadoEstático;
+        public static string Campo2PúblicoEstático;
+
+        private string Campo2Privado;
+        public string Campo2Público;
+        private string CampoPrivado;
+        public string CampoPúblico;
+    }
+
+    internal class Classe3ComCampo
+    {
+    }
+
+    internal class Classe4ComCamposDeExemplo<TTipo>
+    {
+        private Func<TTipo, string> CampoGenérico2Privado;
+        public Func<TTipo, string> CampoGenérico2Público;
+        private TTipo CampoGenéricoPrivado;
+        public TTipo CampoGenéricoPúblico;
+        private int CampoPrivado;
+        public int CampoPúblico;
     }
 }

@@ -63,6 +63,19 @@ namespace Cabrones.Test
         }
 
         /// <summary>
+        ///     Testa se a quantidade de campos próprios públicas está correta.
+        ///     Não considera interface ou herança.
+        ///     Inclui membros estáticos e da instância.
+        /// </summary>
+        /// <param name="type">Tipo.</param>
+        /// <param name="count">Total de esperado.</param>
+        public static void AssertMyOwnPublicFieldsCount(this Type type, int count)
+        {
+            var own = type.MyOwnFields().Where(a => a.IsPublic).ToList();
+            own.Should().HaveCount(count, nameof(AssertMyOwnPublicFieldsCount));
+        }
+
+        /// <summary>
         ///     Testa se a quantidade de métodos próprios públicos está correta.
         ///     Não considera interface ou herança.
         ///     Inclui membros estáticos e da instância.
@@ -122,6 +135,19 @@ namespace Cabrones.Test
                 .Select(a => a.GetProperty()).Distinct()
                 .Select(a => a?.ToSignatureCSharp()).ToList();
             signatures.Should().Contain(signature, nameof(AssertPublicPropertyPresence));
+        }
+
+        /// <summary>
+        ///     Testa se um campo existe declarado no tipo.
+        /// </summary>
+        /// <param name="type">Tipo.</param>
+        /// <param name="signature">Assinatura esperada.</param>
+        public static void AssertPublicFieldPresence(this Type type, string signature)
+        {
+            var signatures = type
+                .AllFields().Where(a => a.IsPublic).Distinct()
+                .Select(a => a?.ToSignatureCSharp()).ToList();
+            signatures.Should().Contain(signature, nameof(AssertPublicFieldPresence));
         }
 
         /// <summary>

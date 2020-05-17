@@ -2,9 +2,13 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\SergioCabral\.nuget\packages\cabrones.utils\2.2.3.295\lib\netstandard2.1\Cabrones.Utils.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c59550ac_002D88c1_002D42ea_002Db4c7_002D789ba6c243f3/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Solution /&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=086c7c4a_002Dd903_002D467b_002Dabf6_002D6f23439c4cd4/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AssertMyOwnPublicFieldsCount_deve_funcionar_corretamente" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::FD3E1A42-9E13-41B3-8ED6-CDB12024E436::.NETCoreApp,Version=v3.0::Cabrones.Test.TestDeclarationsExtensions.AssertMyOwnPublicFieldsCount_deve_funcionar_corretamente&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::FD3E1A42-9E13-41B3-8ED6-CDB12024E436::.NETCoreApp,Version=v3.0::Cabrones.Test.TestDeclarationsExtensions.AssertPublicField_deve_funcionar_corretamente&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
 	
 	
 	
