@@ -2,11 +2,11 @@
 
     <PropertyGroup>
         <IsPackable>true</IsPackable>
-        <Version>1.8.0.905</Version>
+        <Version>1.8.0.908</Version>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.8.0.905</PackageVersion>
+        <PackageVersion>1.8.0.908</PackageVersion>
         <Title>Cabrones.UtilForTest</Title>
         <Authors>sergio@cabral.br.com</Authors>
         <Description>Utils for tests</Description>

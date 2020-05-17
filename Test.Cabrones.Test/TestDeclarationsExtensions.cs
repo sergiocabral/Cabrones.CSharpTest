@@ -84,8 +84,8 @@ namespace Cabrones.Test
         [InlineData(typeof(Classe1ComCampo), 2)]
         [InlineData(typeof(Classe2ComCampo), 4)]
         [InlineData(typeof(Classe3ComCampo), 0)]
-        [InlineData(typeof(Classe4ComCamposDeExemplo<bool>), 5)]
-        [InlineData(typeof(Classe4ComCamposDeExemplo<>), 5)]
+        [InlineData(typeof(Classe4ComCamposDeExemplo<bool>), 3)]
+        [InlineData(typeof(Classe4ComCamposDeExemplo<>), 3)]
         public void AssertMyOwnPublicFieldsCount_deve_funcionar_corretamente(Type tipo, int totalEsperado)
         {
             // Arrange, Given
